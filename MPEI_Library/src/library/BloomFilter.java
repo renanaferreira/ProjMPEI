@@ -15,16 +15,16 @@ public class BloomFilter {
 	}
 	public void insert(Book book) {
 		for (int k = 1; k < 4; k++) {
-			int hash = book.hashCode(k);
+			int hash = (book.hashCode(k) & 0x7fffffff);
 			int index = hash%max_size;
 			array[index] = true;
 		}
 	}
 	public boolean contains(Book book) {
 		for (int k = 1; k < 4; k++) {
-			int hash = book.hashCode(k);
+			int hash = (book.hashCode(k) & 0x7fffffff);
 			int index = hash%max_size;
-			if (array[index] = false) {
+			if (!array[index]) {
 				return false;
 			}
 		}

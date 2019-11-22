@@ -3,7 +3,11 @@ package library;
 public class Book {
 	private String title;
 	private String author;
-	private boolean available;
+	private boolean available = true;
+	public Book(String title, String author) {
+		this.title = title;
+		this.author = author;
+	}
 	public String getTitle() {
 		return title;
 	}
