@@ -1,12 +1,17 @@
 package library;
 
-public class Book {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Book implements Serializable {
 	private String title;
 	private String author;
+	private String path;
 	private boolean available = true;
-	public Book(String title, String author) {
+	public Book(String title, String author, String path) {
 		this.title = title;
 		this.author = author;
+		this.path = path;
 	}
 	public String getTitle() {
 		return title;
@@ -19,6 +24,12 @@ public class Book {
 	}
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
 	}
 	public boolean isAvailable() {
 		return available;
@@ -46,5 +57,9 @@ public class Book {
 		} else {
 			return this.hashCode();
 		}
+	}
+	@Override
+	public String toString() {
+		return "Book [title=" + title + ", author=" + author + ", path=" + path + ", available=" + available + "]";
 	}
 }
