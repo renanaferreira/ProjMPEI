@@ -1,17 +1,13 @@
 package library;
 
-//import java.util.ArrayList;
-//import java.util.Arrays;
-//import java.util.List;
+import java.io.Serializable;
 
-public class BloomFilter {
-	//private List<Boolean> array = new ArrayList<>();
+public class BloomFilter implements Serializable{
 	private boolean[] array;
 	private int max_size;
 	private int nfunc;
 	public BloomFilter(int size, int k) {
 		max_size = size;
-		//array = Arrays.asList(new Boolean[size]);
 		array = new boolean[size];
 		nfunc = k;
 	}

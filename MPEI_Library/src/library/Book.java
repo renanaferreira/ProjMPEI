@@ -1,30 +1,78 @@
 package library;
 
-public class Book {
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.Scanner;
+
+
+public class Book implements Serializable {
 	private String title;
 	private String author;
+	private String path;
 	private boolean available = true;
-	public Book(String title, String author) {
-		this.title = title;
-		this.author = author;
+	private int[] assbook;
+	private int[] asstitle;
+	private static int K = 10;
+
+	public Book(String path) throws FileNotFoundException {
+		this.path = path;
+		setAttributes(path);
+	}
+	private void setAttributes(String path){
+		try {
+			BufferedReader bookfile = new BufferedReader(new FileReader(path));
+			String line;
+			while ((line = bookfile.readLine()) != null) {
+				if (line.startsWith("Title: ")) {
+					title = line.substring(7);
+					line = bookfile.readLine();
+					if (!line.isBlank()) {
+						title += line.substring(4);
+					}
+				}
+				if (line.startsWith("Author: ")) {
+					author = line.substring(8);
+					break;
+				}
+			}
+			bookfile.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public String getTitle() {
 		return title;
 	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
 	public String getAuthor() {
 		return author;
 	}
-	public void setAuthor(String author) {
-		this.author = author;
+	public String getPath() {
+		return path;
 	}
 	public boolean isAvailable() {
 		return available;
 	}
 	public void setAvailable(boolean available) {
 		this.available = available;
+	}
+	public int[] getAssB() {
+		return assbook;
+	}
+	public int[] getAssT() {
+		return asstitle;
+	}
+	public void makeMinHash(MinHash function) {
+		if (function.getOpt() == 1) {
+			assbook = function.createSignatures(path);
+		}
+		if (function.getOpt() == 2) {
+			asstitle = function.createSignatures(title);
+		}
 	}
 	@Override
 	public int hashCode() {
