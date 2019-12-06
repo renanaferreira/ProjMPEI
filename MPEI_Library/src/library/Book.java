@@ -1,22 +1,21 @@
 package library;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Scanner;
+import java.util.Arrays;
 
 
 public class Book implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String title;
 	private String author;
 	private String path;
 	private boolean available = true;
 	private int[] assbook;
 	private int[] asstitle;
-	private static int K = 10;
 
 	public Book(String path) throws FileNotFoundException {
 		this.path = path;
@@ -67,6 +66,7 @@ public class Book implements Serializable {
 		return asstitle;
 	}
 	public void makeMinHash(MinHash function) {
+		// possui MinHash como argumento para possuir consistencia de utilizar o mesmo caso
 		if (function.getOpt() == 1) {
 			assbook = function.createSignatures(path);
 		}
@@ -95,4 +95,10 @@ public class Book implements Serializable {
 			return this.hashCode();
 		}
 	}
+	@Override
+	public String toString() {
+		return "Book [title=" + title + ", author=" + author + ", path=" + path + ", available=" + available
+				+ ", assbook=" + Arrays.toString(assbook) + ", asstitle=" + Arrays.toString(asstitle) + "]";
+	}
+	
 }

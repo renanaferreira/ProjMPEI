@@ -3,10 +3,7 @@ package library;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
 
 public class MinHash {
 	private int k;
@@ -21,8 +18,11 @@ public class MinHash {
 	public int getOpt() {
 		return opt;
 	}
-
+	public int getNHfunc() {
+		return nhfunc;
+	}
 	public int[] createSignatures(String input) {
+		// possui opcao de ler string ou ficheiro
 		int[] output = new int[nhfunc];
 		Arrays.fill(output, Integer.MAX_VALUE);
 		if (opt == 1) {
@@ -46,6 +46,7 @@ public class MinHash {
 					}
 					left = line.substring(nsh*k);
 				}
+				bookfile.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

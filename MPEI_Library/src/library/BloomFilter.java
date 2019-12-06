@@ -3,6 +3,7 @@ package library;
 import java.io.Serializable;
 
 public class BloomFilter implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private boolean[] array;
 	private int max_size;
 	private int nfunc;
