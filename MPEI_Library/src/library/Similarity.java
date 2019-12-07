@@ -28,6 +28,7 @@ public class Similarity {
 		// possibilidade de calcular similhanca de titulo ou conteudo
 		switch (function.getOpt()) {
 		case 1:
+		case 3:
 			while (it.hasNext()) {
 				int[] assbook = it.next().getAssB();
 				int intersect = 0;
@@ -40,6 +41,7 @@ public class Similarity {
 			}
 			break;
 		case 2:
+		case 4:
 			while (it.hasNext()) {
 				int[] asstitle = it.next().getAssT();
 				int intersect = 0;

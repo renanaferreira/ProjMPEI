@@ -14,7 +14,7 @@ public class MinHash {
 		this.nhfunc = nhfunc;
 		this.opt = opt;
 	}
-	
+
 	public int getOpt() {
 		return opt;
 	}
@@ -60,6 +60,81 @@ public class MinHash {
 					if (hash < output[i]) {
 						output[i] = hash;
 					}
+				}
+			}
+		}
+		if (opt == 3) {
+			try {
+				BufferedReader bookfile = new BufferedReader(new FileReader(input));
+				String[] shingle = new String[k];
+				String hshingle = "";
+				int ck = 0;
+				String line;
+				while ((line = bookfile.readLine()) != null) {
+					String[] words = line.trim().split("\\s+");
+					for (String word : words) {
+						if (ck < k-1) {
+							shingle[ck++] = word.trim();
+						} else {
+							shingle[ck] = word.trim();
+							hshingle = String.join(" ",shingle);
+							for (int i = 0; i < nhfunc; i++) {
+								hshingle += i;
+								int hash = hshingle.hashCode();
+								if (hash < output[i]) {
+									output[i] = hash;
+								}
+							}
+							for (int i = 0; i < k-1; i++) {
+								shingle[i] = shingle[i+1];
+							}
+
+						}
+					}
+				}
+				hshingle = String.join(" ",shingle);
+				for (int i = 0; i < nhfunc; i++) {
+					hshingle += i;
+					int hash = hshingle.hashCode();
+					if (hash < output[i]) {
+						output[i] = hash;
+					}
+				}
+				bookfile.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		if (opt == 4) {
+			String[] shingle = new String[k];
+			String hshingle = "";
+			int ck = 0;
+			String[] words = input.trim().split("\\s+");
+			for (String word : words) {
+				if (ck < k-1) {
+					shingle[ck++] = word.trim();
+				} else {
+					shingle[ck] = word.trim();
+					hshingle = String.join(" ",shingle);
+					for (int i = 0; i < nhfunc; i++) {
+						hshingle += i;
+						int hash = hshingle.hashCode();
+						if (hash < output[i]) {
+							output[i] = hash;
+						}
+					}
+					for (int i = 0; i < k-1; i++) {
+						shingle[i] = shingle[i+1];
+					}
+
+				}
+			}
+			hshingle = String.join(" ",shingle);
+			for (int i = 0; i < nhfunc; i++) {
+				hshingle += i;
+				int hash = hshingle.hashCode();
+				if (hash < output[i]) {
+					output[i] = hash;
 				}
 			}
 		}

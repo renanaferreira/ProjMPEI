@@ -17,9 +17,13 @@ public class Book implements Serializable {
 	private int[] assbook;
 	private int[] asstitle;
 
-	public Book(String path) throws FileNotFoundException {
-		this.path = path;
-		setAttributes(path);
+	public Book(String str, int opt) {
+		if(opt == 1) {
+			this.path = str;
+			setAttributes(str);
+		} else {
+			this.title = str;
+		}
 	}
 	private void setAttributes(String path){
 		try {
@@ -67,10 +71,10 @@ public class Book implements Serializable {
 	}
 	public void makeMinHash(MinHash function) {
 		// possui MinHash como argumento para possuir consistencia de utilizar o mesmo caso
-		if (function.getOpt() == 1) {
+		if (function.getOpt() == 1 || function.getOpt() == 3) {
 			assbook = function.createSignatures(path);
 		}
-		if (function.getOpt() == 2) {
+		if (function.getOpt() == 2 || function.getOpt() == 4) {
 			asstitle = function.createSignatures(title);
 		}
 	}
@@ -78,7 +82,6 @@ public class Book implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((author == null) ? 0 : author.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
@@ -87,7 +90,6 @@ public class Book implements Serializable {
 			final int prime = 31;
 			int result = 1;
 			for (int i = 1; i <= k; i++) {
-				result = i * prime * result + ((author == null) ? 0 : author.hashCode());
 				result = i * prime * result + ((title == null) ? 0 : title.hashCode());
 			}
 			return result;
@@ -97,8 +99,7 @@ public class Book implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "Book [title=" + title + ", author=" + author + ", path=" + path + ", available=" + available
-				+ ", assbook=" + Arrays.toString(assbook) + ", asstitle=" + Arrays.toString(asstitle) + "]";
+		return "[title=" + title + ", author=" + author + ", path=" + path + ", available=" + available + "]";
 	}
 	
 }
