@@ -87,8 +87,8 @@ public class LibraryMain {
 					e.printStackTrace();
 				}
 				// submenu da opcao 2
-				System.out.print("(1) Fazer minhash do conteúdo dos livros(letter-by-letter).\n"
-							+ "(2) Fazer minhash dos títulos(letter-by-letter).\n"
+				System.out.print("(1) Fazer minhash do conteúdo dos livros(letter-by-letter) !Não recomendado!.\n"
+							+ "(2) Fazer minhash dos títulos(letter-by-letter) .\n"
 							+ "(3) Fazer minhash do conteúdo dos livros(word-by-word).\n"
 							+ "(4) Fazer minhash dos títulos(word-by-word).\n"
 							+ "? ");

@@ -33,8 +33,7 @@ public class MinHash {
 				String shingle = "";
 				while ((line = bookfile.readLine()) != null) {
 					line = left+line;
-					int nsh = (int) line.length()/k;
-					for (int j = 0; j+k <= nsh*k; j+=k) {
+					for (int j = 0; j <= line.length()-k; j++) {
 						shingle = line.substring(j,j+k);
 						for (int i = 0; i < nhfunc; i++) {
 							shingle += i;
@@ -44,7 +43,7 @@ public class MinHash {
 							}
 						}
 					}
-					left = line.substring(nsh*k);
+					left = shingle.substring(1);
 				}
 				bookfile.close();
 			} catch (IOException e) {
